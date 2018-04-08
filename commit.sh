@@ -3,7 +3,7 @@ git add android/*
 git add app.json
 git add index.js
 git add ios/*
-git add js/*
+git add app/*
 git add res/*
 git add node_modules/*
 git add package.json

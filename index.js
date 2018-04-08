@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import App from './js/page/setup';
+import App from './app/setup';
 
 AppRegistry.registerComponent('learnBestTools', () => App);
