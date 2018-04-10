@@ -3,28 +3,35 @@
 */
 'use strict'
 import React, {Component} from 'react'
-import configureStore from './store/configureStore'
-import sagas from './sagas/index';
+import configureStore from './store/ConfigureStore'
+import sagas from './sagas/Index';
 import { Provider } from 'react-redux'
-import App from './containers/app'
+import App from './containers/App'
+import ThemeUtil from './expand/ThemeUtil'
 
-// const store = configureStore()
-// store.runSaga(sagas)
+const store = configureStore()
+store.runSaga(sagas)
 
-function setup() {
-      
-     class Root extends Component{
-        render() {
-            return (
-                <Provider>
-                    <App />
-                </Provider>
-            );
-        }
-     }   
+export default class setup extends Component{
+    constructor(props) {
+        super(props)
+        this.state = {}
+    }    
 
-     return <Root/>
+    componentDidMount() {
+        const {navigator} = this.props;
+        new ThemeUtil().getTheme().then((data=>{
+            this.setState({
+                theme : data
+            })
+        }))
+    }    
 
+    render() {
+        return (
+            <Provider store={store}>
+                <App theme = {this.state.theme} />
+            </Provider>
+        )
+    }
 }
-
-export default setup

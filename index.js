@@ -1,4 +1,8 @@
 import { AppRegistry } from 'react-native';
-import App from './app/setup';
+import setup from './app/setup';
 
-AppRegistry.registerComponent('learnBestTools', () => App);
+AppRegistry.registerComponent('learnBestTools', () => setup);
+//org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier) 
+/*
+xcodebuild  -exportArchive -archivePath ./learnBestTools.xcarchive -exportPath . -exportOptionsPlist ~/workspace/learnBestTools/ios/AutoPackageScript/EnterpriseExportOptionsPlist.plist
+*/

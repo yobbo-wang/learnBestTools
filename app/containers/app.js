@@ -3,18 +3,20 @@
 */
 import React, {Component} from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation'
-import Home from '../page/home/index'
-import Learn from '../page/learn/index'
-import School from '../page/school/index'
-import My from '../page/my/index'
+import Splash from '../page/Splash'
+import Home from '../page/home/Index'
+import Learn from '../page/learn/Index'
+import School from '../page/school/Index'
+import My from '../page/my/Index'
 
 export default class App extends Component{
+  
 	render() {
-    	return <AppStack />;
-  	}	
+    return <AppStack screenProps = {this.props.theme} />
+  }	
 }
 
-//标签栏
+//底部导航栏
 const TabContainer = TabNavigator(
   {
     Home: { screen: Home },
@@ -26,7 +28,7 @@ const TabContainer = TabNavigator(
     lazy: true,
     tabBarPosition: 'bottom',
     tabBarOptions: {
-      activeTintColor: '#3e9ce9',
+      //activeTintColor: '#3e9ce9',
       inactiveTintColor: '#999999',
       showIcon: true,
       style: {
@@ -42,10 +44,10 @@ const TabContainer = TabNavigator(
   }
 )
 
-
 //导航拦
 const AppStack = StackNavigator(
 	{
+    Splash: { screen: Splash },
     Home: {
       screen: TabContainer,
       navigationOptions: {
@@ -56,9 +58,6 @@ const AppStack = StackNavigator(
   {
     headerMode: 'screen',
     navigationOptions: {
-      headerStyle: {
-        backgroundColor: '#3e9ce9'
-      },
       headerTitleStyle: {
         color: '#fff',
         fontSize: 20
