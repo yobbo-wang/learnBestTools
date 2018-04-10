@@ -11,7 +11,7 @@ import {
   Dimensions,
   TouchableHighlight,
   TouchableNativeFeedback
-}from 'react-native'
+} from 'react-native'
 import Swiper from 'react-native-swiper'
 
 const isIOS = Platform.OS == 'ios'

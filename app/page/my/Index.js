@@ -25,12 +25,15 @@ export default class Index extends Component {
 	static navigationOptions = ({ navigation, screenProps }) => ({
 	    title: '我的',
 	    tabBarIcon: ({ tintColor }) => (
-	    	<Image style={{width: 26, height: 26,resizeMode: 'contain',tintColor: tintColor != '#999999' ? screenProps.themeColor : tintColor}} 
+	    	<Image style={{width: 26, height: 26,resizeMode: 'contain', tintColor: tintColor == '#999999' ? tintColor : screenProps.themeColor}} 
 	    	source={require('../../res/images/ic_my.png')} />
 	    ),
 	    headerStyle:{
             backgroundColor: screenProps.themeColor
-        }
+        },
+        tabBarLabel: ({ tintColor, fontSize}) => (
+            <Text style={{color: tintColor == '#999999' ? tintColor : screenProps.themeColor, fontSize:10}}>我的</Text>
+        ),
   	})
 
 	onClick(tab) {

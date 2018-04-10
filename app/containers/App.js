@@ -1,13 +1,15 @@
 /*
 * 首页
 */
-import React, {Component} from 'react';
+import React, {Component} from 'react'
+import { Platform } from 'react-native'
 import { StackNavigator, TabNavigator } from 'react-navigation'
 import Splash from '../page/Splash'
 import Home from '../page/home/Index'
 import Learn from '../page/learn/Index'
 import School from '../page/school/Index'
 import My from '../page/my/Index'
+
 
 export default class App extends Component{
   
@@ -28,7 +30,6 @@ const TabContainer = TabNavigator(
     lazy: true,
     tabBarPosition: 'bottom',
     tabBarOptions: {
-      //activeTintColor: '#3e9ce9',
       inactiveTintColor: '#999999',
       showIcon: true,
       style: {
@@ -56,7 +57,8 @@ const AppStack = StackNavigator(
     }
   },
   {
-    headerMode: 'screen',
+    headerMode: Platform.OS == 'ios' ? 'float' : 'screen',
+    headerTransitionPreset: 'uikit', 
     navigationOptions: {
       headerTitleStyle: {
         color: '#fff',

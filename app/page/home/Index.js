@@ -26,14 +26,16 @@ export default class Index extends Component {
   	static navigationOptions = ({ navigation, screenProps}) => ({
 	    title: '首页',
 	    tabBarIcon: ({ tintColor }) => (
-	    	<Image style={{width: 26, height: 26,resizeMode: 'contain',tintColor: tintColor != '#999999' ? screenProps.themeColor : tintColor }} 
+	    	<Image style={{width: 26, height: 26,resizeMode: 'contain',tintColor: tintColor == '#999999' ? tintColor : screenProps.themeColor }} 
 	    	source={require('../../res/images/ic_polular.png')} />
 	    ),
-      headerStyle:{
-        backgroundColor: screenProps.themeColor
-      },
-      
-  	})
+        headerStyle:{
+            backgroundColor: screenProps.themeColor
+        },
+        tabBarLabel: ({ tintColor, fontSize}) => (
+            <Text style={{color: tintColor == '#999999' ? tintColor : screenProps.themeColor, fontSize:10}}>首页</Text>
+        ),
+    })    
 
     componentDidMount() {
         this.loadData(this.props.timeSpan, true)
@@ -79,7 +81,7 @@ export default class Index extends Component {
                         titleColor = {this.props.screenProps.themeColor}
                         colors = {[this.props.screenProps.themeColor, this.props.screenProps.themeColor, this.props.screenProps.themeColor]}
             />}
-            data = {[{key: '新闻资讯'}, {key: 'b'}]}
+            data = {[]}
             renderItem = {({item}) => 
               <Text>{item.key}</Text>
             }
