@@ -19,8 +19,8 @@ export default class ThemeDao {
                     return;
                 }
                 if (!result) {
-                    this.save(ThemeFlags.Default);
-                    result = ThemeFlags.Default;
+                    this.save(ThemeFlags.Default.color);
+                    result = ThemeFlags.Default.color;
                 }
                 resolve(ThemeFactory.createTheme(result));
             });

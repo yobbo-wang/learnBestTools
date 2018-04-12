@@ -1,5 +1,5 @@
 /**
-* home index.js
+* Learn index.js
 */
 
 import React, {Component} from 'react'
@@ -7,59 +7,74 @@ import {
 	View, 
 	Text,
 	Image,
-	TouchableHighlight,
-    StyleSheet
+    StyleSheet,
 }
 from 'react-native'
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view'
-import ViewUtils from '../../expand/ViewUtils'
+import LocalLearn from './LocalLearn'
+
+const category = [{key: 'recommend', tabLabel: '推荐'},
+{key: 'localLearn', tabLabel: '本地学习'},
+{key: 'classicalCouse', tabLabel: '精品课'},
+{key: 'freeClassical', tabLabel: '免费课程'}]
 
 export default class Index extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            screenProps: this.props.screenProps
+            theme: this.props.screenProps.theme
         }
-    } 
+    }
+    
+    componentDidMount() {
+        this.props.screenProps.appComponent.addSubscriber(this.onSubscriber)
+    }
 
-	static navigationOptions = ({ navigation, screenProps }) => ({
-	    title: '学习',
-	    tabBarIcon: ({ tintColor }) => (
-	    	<Image style={{width: 26, height: 26,resizeMode: 'contain',tintColor: tintColor == '#999999' ? tintColor : screenProps.themeColor}} 
-	    	source={require('../../res/images/ic_trending.png')} />
-	    ),
-        headerStyle:{
-            backgroundColor: screenProps.themeColor
-        },
-        tabBarLabel: ({ tintColor, fontSize}) => (
-            <Text style={{color: tintColor == '#999999' ? tintColor : screenProps.themeColor, fontSize:10}}>学习</Text>
-        ),
-	    headerRight: (
-	      	<View style={{flexDirection: 'row',}}>
-                <TouchableHighlight
-                    ref='button'
-                    underlayColor='transparent'
-                    onPress={()=>{
-                        this.props.navigator.push({
-                            component: SearchPage,
-                            params: {
-                                theme:this.state.theme,
-                                ...this.props,
-                            },
-                        });
-                    }}>
-                    <View style={{padding:5}}>
-                        <Image
-                            style={{width: 24, height: 24}}
-                            source={require('../../res/images/ic_search_white_48pt.png')}
-                        />
-                    </View>
-                </TouchableHighlight>
-                {ViewUtils.getMoreButton(()=>this.refs.moreMenu.open())}
-            </View>
-    	)
-  	})
+    componentWillUnmount() {
+        this.props.screenProps.appComponent.removeSubscriber(this.onSubscriber);
+    }
+
+    // 回调改变主题颜色
+    onSubscriber = (updateTheme)=> {
+        var changedValues = this.props.screenProps.appComponent.changedValues
+        if (changedValues.app.themeChange && updateTheme) {
+            this.setState({
+                theme: updateTheme
+            })
+        }
+    }
+
+    renderContent(key) {
+        if(key == undefined) return null
+        var options = {}    
+        switch (key) {
+          case 'recommend':
+                return null
+          case 'localLearn':
+                return (<LocalLearn {...this.props} /> )
+          case 'classicalCouse':
+            
+          case 'freeClassical':
+            
+          default:
+            return null
+        }
+    }
+
+    // 固定几个分类，其他自定义扩展，便于后期自定义添加功能
+    learnConetnt() {
+        // TODO 查询用户自定义分类，再加到列表中
+        const content = category.map((item, i) => {
+            const categoryView = (
+                <View key={item.key} tabLabel={item.tabLabel} style={styles.base}>
+                    {this.renderContent(item.key)}
+                </View>
+            )
+            return categoryView
+        })
+        return content
+    }
 
 	render() {
     	return (
@@ -71,14 +86,11 @@ export default class Index extends Component {
                       textStyle={styles.tabText}
                     />
                   )}
-                  tabBarBackgroundColor = {this.state.screenProps.themeColor}
+                  tabBarBackgroundColor = {this.state.theme.themeColor}
                   tabBarUnderlineStyle = {styles.tabBarUnderline}
                   tabBarActiveTextColor= '#fff'
-                  tabBarInactiveTextColor = '#f1f1f1'>
-                    <View key='1u' tabLabel='推荐' style={styles.base}><Text>推荐</Text></View>
-                    <View key='2u' tabLabel='本地学习' style={styles.base}><Text>课件、实验讲义、题库</Text></View>
-                    <View key='3u' tabLabel='精品课' style={styles.base}><Text>网络精品课</Text></View>
-                    <View key='4u' tabLabel='免费课程' style={styles.base}><Text>免费课程</Text></View>
+                  tabBarInactiveTextColor = '#f3f3f3'>
+                    {this.learnConetnt()}
                 </ScrollableTabView>
             </View>
         )
@@ -95,8 +107,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     tabBarUnderline: {
-        backgroundColor: '#3e9ce9',
-        height: 2
+        backgroundColor: '#fff',
+        height: 3
     },
     tab: {
         paddingBottom: 0

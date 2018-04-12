@@ -1,5 +1,5 @@
 /*
-* learn 状态机
+* home状态机
 */
 
 import * as types from '../constants/ActionTypes';
@@ -14,13 +14,14 @@ export default function learn(state = initialState, action) {
     case types.FETCH_TYPE_LIST:
       return Object.assign({}, state, {
         loading: true
-      });
+      })
     case types.RECEIVE_TYPE_LIST:
       return Object.assign({}, state, {
         loading: false,
         typeList: action.typeList
-      });
+      })
     default:
       return state
   }
 }
+

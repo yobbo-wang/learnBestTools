@@ -22,6 +22,8 @@ envionmentVariables() {
     # fir账户的token, 这个token换成自己fir账号生成的token即可
     firim_token="4042ce0cdea8c93954b1b9142ac91745"
 
+    AdHocBundleID="com.js.auyf"
+
     # 打包脚本文件夹路径
     script_path=$(pwd)
     # 指定项目的scheme名称（默认为one，需要再次赋值）

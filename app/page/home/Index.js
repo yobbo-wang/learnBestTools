@@ -3,39 +3,32 @@
 */
 
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import { 
 	StyleSheet,
 	View, 
 	Text, 
 	Image,
   FlatList,
-  RefreshControl 
+  RefreshControl, 
 }from 'react-native'
 import SwiperIndex from './SwiperIndex'
 
 export default class Index extends Component {
-	   constructor(props) {
+
+    static propTypes = {
+        homeActions: PropTypes.object, 
+        home: PropTypes.object.isRequired
+    }
+
+	constructor(props) {
         super(props)
         this.state = {
             isLoading: false,
             isLodingFail: false,
-            screenProps: this.props.screenProps
+            theme: this.props.screenProps.theme
         }
     }    
-
-  	static navigationOptions = ({ navigation, screenProps}) => ({
-	    title: '首页',
-	    tabBarIcon: ({ tintColor }) => (
-	    	<Image style={{width: 26, height: 26,resizeMode: 'contain',tintColor: tintColor == '#999999' ? tintColor : screenProps.themeColor }} 
-	    	source={require('../../res/images/ic_polular.png')} />
-	    ),
-        headerStyle:{
-            backgroundColor: screenProps.themeColor
-        },
-        tabBarLabel: ({ tintColor, fontSize}) => (
-            <Text style={{color: tintColor == '#999999' ? tintColor : screenProps.themeColor, fontSize:10}}>首页</Text>
-        ),
-    })    
 
     componentDidMount() {
         this.loadData(this.props.timeSpan, true)
@@ -67,19 +60,25 @@ export default class Index extends Component {
         })
     }
 
+    getSwiper (){
+        return(
+            <SwiperIndex themeColor = {this.state.theme.themeColor} />
+        ) 
+    }
+
 	render() {
     	return(
         <View style={styles.container}>
       	   <FlatList 
-            ListHeaderComponent = {SwiperIndex}
+            ListHeaderComponent = {this.getSwiper.bind(this)}
             refreshControl={
                     <RefreshControl
                         refreshing = {this.state.isLoading}
                         onRefresh = {() => this.onRefresh()}
-                        tintColor = {this.props.screenProps.themeColor}
+                        tintColor = {this.state.theme.themeColor}
                         title = "数据加载中..."
-                        titleColor = {this.props.screenProps.themeColor}
-                        colors = {[this.props.screenProps.themeColor, this.props.screenProps.themeColor, this.props.screenProps.themeColor]}
+                        titleColor = {this.state.theme.themeColor}
+                        colors = {[this.state.theme.themeColor, this.state.theme.themeColor, this.state.theme.themeColor]}
             />}
             data = {[]}
             renderItem = {({item}) => 

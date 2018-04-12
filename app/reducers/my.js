@@ -1,5 +1,5 @@
 /*
-* learn 状态机
+* my状态机
 */
 
 import * as types from '../constants/ActionTypes';
@@ -9,17 +9,17 @@ const initialState = {
   typeList: {}
 }
 
-export default function learn(state = initialState, action) {
+export default function my(state = initialState, action) {
   switch (action.type) {
     case types.FETCH_TYPE_LIST:
       return Object.assign({}, state, {
         loading: true
-      });
+      })
     case types.RECEIVE_TYPE_LIST:
       return Object.assign({}, state, {
         loading: false,
         typeList: action.typeList
-      });
+      })
     default:
       return state
   }

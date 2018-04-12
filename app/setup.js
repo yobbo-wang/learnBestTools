@@ -15,11 +15,12 @@ store.runSaga(sagas)
 export default class setup extends Component{
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            
+        }
     }    
 
     componentDidMount() {
-        const {navigator} = this.props;
         new ThemeUtil().getTheme().then((data=>{
             this.setState({
                 theme : data
