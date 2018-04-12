@@ -76,15 +76,6 @@ export default class Index extends Component {
                         </View>
                     </TouchableHighlight>
                     <View style={GlobalStyles.line} />
-
-                    <TouchableHighlight>
-	                    <View style={[styles.item, {height: 50}]}>
-	                    	 <View style={{alignItems: 'center', flexDirection: 'row'}}>
-									状态栏
-	                    	 </View>
-	                    </View>
-                    </TouchableHighlight>
-                    <View style={GlobalStyles.line} />
                     
                     <Text style={styles.groupTitle}>我的学习</Text>
                     <View style={GlobalStyles.line} />
@@ -116,6 +107,17 @@ export default class Index extends Component {
 
 }	
 
+/*
+ <TouchableHighlight>
+                        <View style={[styles.item, {height: 50}]}>
+                             <View style={{alignItems: 'center', flexDirection: 'row'}}>
+                                    状态栏
+                             </View>
+                        </View>
+                    </TouchableHighlight>
+                    <View style={GlobalStyles.line} />
+
+*/
 
 const styles = StyleSheet.create({
     item: {

@@ -8,6 +8,7 @@ import {
 	Image,
     StyleSheet,
     TouchableHighlight,
+    TouchableNativeFeedback,
     Platform,
     Dimensions,
     ScrollView
