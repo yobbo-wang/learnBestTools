@@ -30,7 +30,7 @@ export default class Splash extends Component{
 	    }).start()
 	    SplashScreen.hide()
 	    this.timer = setTimeout(() => {
-	      	NavigationUtil.reset(this.props.navigation, 'Home')
+	      	NavigationUtil.reset(this.props.navigation, 'Home') //需要把props一层层往下传递
 	    }, 1000)
   	}
 
