@@ -6,6 +6,7 @@ git add ios/*
 git add app/*
 git add res/*
 git add package.json
+git add package-lock.json
 git add yarn.lock
 git add README.md
 git add commit.sh
