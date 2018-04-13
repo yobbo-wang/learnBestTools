@@ -1,6 +1,12 @@
-/*
-* Splash.js	启动页
-*/
+/**
+ * learnBestTools
+ * App 启动图组件
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
+ */
+'use strict'
 import React, {Component} from 'react'
 import { Dimensions, Animated } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
@@ -30,7 +36,7 @@ export default class Splash extends Component{
 	    }).start()
 	    SplashScreen.hide()
 	    this.timer = setTimeout(() => {
-	      	NavigationUtil.reset(this.props.navigation, 'Home') //需要把props一层层往下传递
+	      	NavigationUtil.reset(this.props.navigation, 'Home')
 	    }, 1000)
   	}
 

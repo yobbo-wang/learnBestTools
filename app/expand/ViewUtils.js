@@ -1,10 +1,13 @@
 /**
- * ViewUtils
- * @flow
- **/
+ * learnBestTools
+ * 公共试图组件处理类
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
+ */
 'use strict'
-
-import React  from 'react';
+import React  from 'react'
 import {
     TouchableHighlight,
     Image,
@@ -12,7 +15,7 @@ import {
     StyleSheet,
     Text,
     View,
-} from 'react-native';
+} from 'react-native'
 
 export default class ViewUtils {
     static getSettingItem(callBack, icon, text, tintStyle, desc, expandableIco) {

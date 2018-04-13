@@ -1,7 +1,12 @@
 /**
-* home index.js
-*/
-
+ * learnBestTools
+ * 我的
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
+ */
+ 'use strict'
 import React, {Component} from 'react'
 import {
 	View, 
@@ -16,7 +21,10 @@ import GlobalStyles from '../../res/styles/GlobalStyles'
 import ViewUtils from '../../expand/ViewUtils'
 import {MoreMenu} from '../common/MoreMenu'
 import NavigationUtil from '../../expand/NavigationUtil'
+import CustomTheme from './CustomTheme'
+import ThemeDao from "../../expand/ThemeUtil"
 
+let changeThemeColor = null, commonNavigation = null
 export default class Index extends Component {
 	constructor(props) {
         super(props)
@@ -24,30 +32,58 @@ export default class Index extends Component {
             theme: this.props.screenProps.theme
         }
     } 
+    
+	onClick(tab, title) {
+        //定义所有组件用参数传给公共熏染组件显示
+        let componentList = [<CustomTheme {...this.props} callback = {this.callbackChangeTheme.bind(this)} />],
+        openCommonNavigateViewAfterCallback = this.openCommonNavigateViewAfterCallback.bind(this),
+        key = 'my-index-CommonNavigateView'
+        const headerRight = this.getHeaderRight.bind(this)
+        const params = {menuType: tab, theme: this.state.theme, title, componentList, headerRight, openCommonNavigateViewAfterCallback}
+        NavigationUtil.navigate(this.props.navigation, 'CommonNavigateView', params, key)
+	}	
 
-    componentDidMount() {
-        this.props.screenProps.appComponent.addSubscriber(this.onSubscriber)
+    //定义头部导航右边显示
+    getHeaderRight() {
+        return (
+            <View style={{flexDirection: 'row',}}>
+                <TouchableHighlight
+                    ref='button'
+                    underlayColor='transparent'
+                    onPress={()=>{
+                        if(changeThemeColor != null && commonNavigation != null) {
+                            new ThemeDao().save(changeThemeColor)
+                            NavigationUtil.back(commonNavigation, commonNavigation.state.key)
+                            changeThemeColor = null, commonNavigation = null
+                        }
+                    }}>
+                    <View style={{padding:5, flexDirection: 'row'}}>
+                        <Image
+                            style={{width: 32, height: 32}}
+                            source={require('../../res/images/ic_done.png')}
+                        />
+                    </View>
+                </TouchableHighlight>
+              </View>
+        )
     }
 
-    componentWillUnmount() {
-        this.props.screenProps.appComponent.removeSubscriber(this.onSubscriber);
+    openCommonNavigateViewAfterCallback(navigation) {
+        if(navigation != undefined){
+            commonNavigation = navigation
+        }
     }
 
-    // 回调改变主题颜色
-    onSubscriber = (updateTheme)=> {
-        var changedValues = this.props.screenProps.appComponent.changedValues
-        if (changedValues.app.themeChange && updateTheme) {
+    callbackChangeTheme(updateTheme) {
+        if(updateTheme != undefined){
+            changeThemeColor = updateTheme.themeColor
             this.setState({
                 theme: updateTheme
             })
+            // 更新所有页面的颜色
+            this.props.screenProps.appComponent.onThemeChange(updateTheme)
         }
     }
-	
-	onClick(tab, title) {
-        const params = {menuType: tab, theme: this.state.theme, title}
-        const { navigate } = this.props.navigation
-        navigate('CommonNavigateView', params)
-	}	
 
 	getItem(tag, icon, text, desc, expandableIco) {
         return ViewUtils.getSettingItem( () => this.onClick(tag, text), icon, text, this.state.theme.styles.tabBarSelectedIcon, desc, expandableIco)

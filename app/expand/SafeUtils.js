@@ -1,7 +1,12 @@
-/*
-* 用来获取是不是iphoneX
+/**
+ * learnBestTools
+ * 判断客户端是不是iphoneX
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
  */
-
+'use strict'
 import {
   DeviceInfo,
   Platform,

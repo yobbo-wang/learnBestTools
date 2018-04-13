@@ -1,88 +1,79 @@
-/*
-* 公共窗口
-*/
-
+/**
+ * learnBestTools
+ * 新窗口公共模版
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
+ */
+ 'use strict'
 import React, {Component} from 'react'
 import { 
 	View,
 	Text,
-  TouchableHighlight,
-  Image
+  StyleSheet,
  } from 'react-native'
-import CustomThemePage from '../my/CustomTheme'
-import {MoreMenu} from '../common/MoreMenu'
-import ThemeDao from "../../expand/ThemeUtil"
 import NavigationUtil from '../../expand/NavigationUtil'
 
 export default class CommonNavigateView extends Component{
   	constructor(props) {
           super(props)
           this.state = {
-              params: this.props.navigation.state.params,
+              theme: this.props.screenProps.theme,
           }
     }
 
   	static navigationOptions = ({ navigation, screenProps }) => ({
   	    title: navigation.state.params.title,
   	    headerStyle: {
-            backgroundColor: navigation.state.params.theme.themeColor
+            backgroundColor: screenProps.appComponent.state.theme?screenProps.appComponent.state.theme.themeColor:screenProps.theme.themeColor 
         },
-        headerRight: CommonNavigateView.getHeaderRight(navigation)
+        headerRight: navigation.state.params.headerRight ? navigation.state.params.headerRight() : null
     })
 
-    static getHeaderRight(navigation){
-        const menuType =  navigation.state.params.menuType
-        let headerRightView = null
-        switch(menuType){
-            case MoreMenu.Custom_Theme:
-              headerRightView = (
-                  <View style={{flexDirection: 'row',}}>
-                    <TouchableHighlight
-                        ref='button'
-                        underlayColor='transparent'
-                        onPress={()=>{
-                            if(navigation.state.params.changeTheme){
-                                new ThemeDao().save(navigation.state.params.theme.themeColor)
-                            }
-                            navigation.goBack()
-                        }}>
-                        <View style={{padding:5, flexDirection: 'row'}}>
-                            <Image
-                                style={{width: 32, height: 32}}
-                                source={require('../../res/images/ic_done.png')}
-                            />
-                        </View>
-                    </TouchableHighlight>
-                  </View>
-              )
-              break
+
+    componentDidMount() {
+        if(this.props.navigation.state.params.openCommonNavigateViewAfterCallback){
+            this.props.navigation.state.params.openCommonNavigateViewAfterCallback(this.props.navigation)
         }
-        return headerRightView
+        this.props.screenProps.appComponent.addSubscriber(this.onSubscriber)
     }
 
-    callbackSelectTheme(updateTheme) {
-        if(updateTheme != undefined){
-            // 更新所有页面的颜色
-            NavigationUtil.setParams( this.props.navigation, this.props.navigation.state.key, 
-              {...this.state.params, theme: updateTheme, changeTheme: true} )
-            this.props.screenProps.appComponent.onThemeChange(updateTheme)
-        }
+    componentWillUnmount() {
+        this.props.screenProps.appComponent.removeSubscriber(this.onSubscriber);
     }
 
-  	getRenderCotent() {
-  		const menuType = this.props.navigation.state.params.menuType
-  		let TargetComponent = null, callback = null
-  		switch (menuType) {
-  			case MoreMenu.Custom_Theme:
-  				TargetComponent = CustomThemePage
-          callback = this.callbackSelectTheme
-          break
-  		}
-  		return <TargetComponent callback = {callback.bind(this)}  theme = {this.state.params.theme} />
-  	}
-
+    // 回调改变主题颜色
+    onSubscriber = (updateTheme)=> {
+        var changedValues = this.props.screenProps.appComponent.changedValues
+        if (changedValues.app.themeChange && updateTheme) {
+            this.setState({
+                theme: updateTheme
+            })
+            NavigationUtil.setParams(this.props.navigation, this.props.navigation.state.key, updateTheme)
+        }
+    }
+ 
+    //从参数中获取公共组件进行熏染
+    getRenderCotent() {
+        const componentList = this.props.navigation.state.params.componentList
+        let pages =[]
+        for (let i = 0; i < componentList.length; i++) {
+            pages.push(componentList[i])
+        }
+        return(
+            <View style={styles.container}>{pages}</View>
+        )
+    }
+    
 	render() {
 		return this.getRenderCotent()
 	}	
 
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    }
+})

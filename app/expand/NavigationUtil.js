@@ -1,6 +1,12 @@
-/*
-* NavigationUtil.js 工具类用来选择指定navigation
-*/
+/**
+ * learnBestTools
+ * NavigationActions处理工具类
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
+ */
+'use strict'
 import { NavigationActions } from 'react-navigation'
 
 const reset = (navigation, routeName) => {
@@ -8,16 +14,32 @@ const reset = (navigation, routeName) => {
     index: 0,
     actions: [NavigationActions.navigate({ routeName })]
   })
-  navigation.dispatch(resetAction);
+  navigation.dispatch(resetAction)
 }
 
-// 给指定navigation传状态机
+const navigate = (navigation, routeName, params, key) => {
+	const navigateAction = NavigationActions.navigate({
+	  routeName: routeName,
+	  params: params,
+	  key: key == undefined ? routeName : key,
+	  action: NavigationActions.navigate({ routeName: routeName }),
+	})
+	navigation.dispatch(navigateAction)
+}
+
 const setParams = (navigation, key, params) => {
 	const setParamsAction = NavigationActions.setParams({
 		  params: params,
 		  key: key,
-	});
-	navigation.dispatch(setParamsAction);
+	})
+	navigation.dispatch(setParamsAction)
 }
 
-export default {reset , setParams}
+const back = (navigation, key) => {
+	const backAction = NavigationActions.back({
+	  key: key,
+	})
+	navigation.dispatch(backAction)
+}
+
+export default {reset , navigate, setParams, back}

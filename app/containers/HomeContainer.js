@@ -1,7 +1,12 @@
-/*
-* home首页入口
-*/
-
+/**
+ * learnBestTools
+ * 首页入口组件
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
+ */
+ 'use strict'
 import React, {Component} from 'react'
 import { 
 	StyleSheet,
@@ -12,7 +17,6 @@ import {
 }from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import CodePush from 'react-native-code-push'
 import Home from '../page/home/Index'
 import * as homeCreators from '../actions/home'
 import NavigationUtil from '../expand/NavigationUtil'
@@ -23,7 +27,7 @@ class HomeContainer extends Component {
         this.state ={
             theme: this.props.screenProps.theme
         }
-    }  
+    }
 
 	static navigationOptions = ({ navigation, screenProps}) => ({
 	    title: '首页',
@@ -74,34 +78,19 @@ class HomeContainer extends Component {
         this.props.screenProps.appComponent.removeSubscriber(this.onSubscriber);
     }
 
-    // 回调改变主题颜色
     onSubscriber = (updateTheme)=> {
         var changedValues = this.props.screenProps.appComponent.changedValues
         if (changedValues.app.themeChange && updateTheme) {
             this.setState({
                 theme: updateTheme
             })
-            NavigationUtil.setParams(this.props.navigation, 'Home', updateTheme)
+            NavigationUtil.setParams(this.props.navigation, this.props.navigation.state.key, updateTheme)
         }
     }
 
     render() {
     	return <Home {...this.props} />
   	}
-
-    /*
-
-        CodePush.sync({
-            deploymentKey: 'RGOUfyINiLicZnld67aD0nrbRvyLV1Ifekvul', // KEY
-            updateDialog: {
-                optionalIgnoreButtonLabel: '稍后',
-                optionalInstallButtonLabel: '后台更新',
-                optionalUpdateMessage: '优学堂有新版本了，是否更新？',
-                title: '更新提示'
-            },
-            installMode: CodePush.InstallMode.ON_NEXT_RESTART
-        })
-    */
 
 }
 

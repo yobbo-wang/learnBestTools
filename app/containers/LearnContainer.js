@@ -1,6 +1,12 @@
-/*
-* lrean 学习入口
-*/
+/**
+ * learnBestTools
+ * 学习版块入口组件
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
+ */
+'use strict'
 import React, {Component} from 'react'
 import { 
 	StyleSheet,
@@ -80,7 +86,7 @@ class LearnContainer extends Component {
             this.setState({
                 theme: updateTheme
             })
-            NavigationUtil.setParams(this.props.navigation, 'Learn', updateTheme)
+            NavigationUtil.setParams(this.props.navigation, this.props.navigation.state.key, updateTheme)
         }
     }
 

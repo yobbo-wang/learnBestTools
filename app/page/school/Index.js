@@ -1,7 +1,12 @@
 /**
-* home index.js
-*/
-
+ * learnBestTools
+ * 校园
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
+ */
+'use strict'
 import React, {Component} from 'react'
 import {
 	View, 
@@ -9,7 +14,9 @@ import {
 	Image
 } 
 from 'react-native'
+import SwiperIndex from '../home/SwiperIndex'
 
+let playList = [<SwiperIndex />] // 动态熏染组件
 export default class Index extends Component {
 
 	constructor(props) {
@@ -19,7 +26,18 @@ export default class Index extends Component {
         }
     }
 
+    getRenderCotent() {
+        var pages =[]
+        for (var i = 0; i < playList.length; i++) {
+            pages.push(<Text>{playList[i]}</Text> )
+        }
+        return(
+            <View>{pages}</View>
+        )
+    }
+
 	render() {
-    	return <View><Text>校园</Text></View>
+     return this.getRenderCotent()
+
   	}
 }	

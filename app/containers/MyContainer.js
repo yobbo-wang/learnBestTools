@@ -1,6 +1,12 @@
-/*
-* my 我的入口
-*/
+/**
+ * learnBestTools
+ * 我的版块入口组件
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
+ */
+'use strict'
 import React, {Component} from 'react'
 import { 
 	StyleSheet,
@@ -55,7 +61,7 @@ class MyContainer extends Component {
             this.setState({
                 theme: updateTheme
             })
-            NavigationUtil.setParams(this.props.navigation, 'My', updateTheme)
+            NavigationUtil.setParams(this.props.navigation, this.props.navigation.state.key, updateTheme)
         }
     }
 

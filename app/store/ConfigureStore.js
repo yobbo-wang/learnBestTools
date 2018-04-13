@@ -1,7 +1,12 @@
 /**
- *configureStore
- *
+ * learnBestTools
+ * configureStore.js
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
  */
+'use strict'
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware, { END } from 'redux-saga';
 

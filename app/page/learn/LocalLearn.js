@@ -1,6 +1,12 @@
-/*
-*/
-
+/**
+ * learnBestTools
+ * 本地学习
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
+ */
+ 'use strict'
 import React, {Component} from 'react'
 import {
 	View, 
@@ -17,6 +23,8 @@ from 'react-native'
 import Swiper from 'react-native-swiper'
 import px2pd from '../../expand/px2dp'
 import SwiperIndex from '../home/SwiperIndex'
+import LearnDetail from './LearnDetail'
+import NavigationUtil from '../../expand/NavigationUtil'
 
 const isIOS = Platform.OS == 'ios'
 const {width,height} = Dimensions.get('window')
@@ -36,7 +44,7 @@ export default class LocalLearn extends Component {
 	constructor(props) {
         super(props)
         this.state = {
-            themeColor: this.props.themeColor
+            theme: this.props.screenProps.theme
         }
     }
 
@@ -58,7 +66,14 @@ export default class LocalLearn extends Component {
         }
     }
 
-    _renderTypes(){
+    toLearnDesc() {
+        //定义所有组件用参数传给公共熏染组件显示
+        let componentList = [<LearnDetail {...this.props} />], key = 'LocalLearn-CommonNavigateView'
+        const params = {theme: this.state.theme, title : '课件/实验讲义', componentList}
+        NavigationUtil.navigate(this.props.navigation, 'CommonNavigateView', params, key)
+    }
+
+    _learnClassify(){
         const w = width/4, h = w*.6 + 20
         let renderSwipeView = (types, n) => {
             return (
@@ -73,9 +88,13 @@ export default class LocalLearn extends Component {
                             )
                             return (
                                 isIOS?(
-                                    <TouchableHighlight style={{width: w, height: h}} key={i} onPress={() => {}}>{render}</TouchableHighlight>
+                                    <TouchableHighlight style={{width: w, height: h}} key={i} onPress={() => {
+                                        this.toLearnDesc()
+                                    }}>{render}</TouchableHighlight>
                                 ):(
-                                    <TouchableNativeFeedback style={{width: w, height: h}} key={i} onPress={() => {}}>{render}</TouchableNativeFeedback>
+                                    <TouchableNativeFeedback style={{width: w, height: h}} key={i} onPress={() => {
+
+                                    }}>{render}</TouchableNativeFeedback>
                                 )
                             )
                         })
@@ -96,6 +115,14 @@ export default class LocalLearn extends Component {
         )
     }
 
+    _newwestCurriculum() {
+        return (
+            <View style={styles.typesView}>
+                
+            </View>
+        )
+    }
+
     render() {
     	return (
     		<View style={styles.container}>
@@ -105,7 +132,11 @@ export default class LocalLearn extends Component {
                     </View>
                     <Text style={styles.groupTitle}>学习分类</Text>
                     <View style={{backgroundColor:"#fff",paddingBottom:px2pd(10)}}>
-                       {this._renderTypes()}
+                       {this._learnClassify()}
+                    </View>
+                    <Text style={styles.groupTitle}>最新课程</Text>
+                    <View style={{backgroundColor:"#fff",paddingBottom:px2pd(10)}}>
+                       {this._newwestCurriculum()}
                     </View>
                </ScrollView>
             </View>

@@ -1,7 +1,12 @@
 /**
- * 自定义主题
- * @ yobbo
- * **/
+ * learnBestTools
+ * 自定义主题颜色
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
+ */
+ 'use strict'
 import React, {Component} from "react"
 import {
     StyleSheet,
@@ -30,8 +35,9 @@ export default class CustomTheme extends Component {
         }
     }
 
+    //回调用来记录主题颜色，便于保存主题颜色
     onSelectTheme(themeKey) {
-        this.state.callback(ThemeFactory.createTheme(ThemeFlags[themeKey].color)) //回调用来记录主题颜色，便于保存主题颜色
+        this.state.callback(ThemeFactory.createTheme(ThemeFlags[themeKey].color)) 
     }
 
     renderCustomThemeView() {
@@ -52,13 +58,13 @@ export default class CustomTheme extends Component {
                     <Text style={styles.themeText}>{ThemeFlags[themeKey].key}</Text>
                 </View>
             </TouchableHighlight>
-        );
+        )
     }
 
     renderThemeItems() {
-        var views = []
+        let views = []
         for (let i = 0, keys = Object.keys(ThemeFlags), l = keys.length; i < l; i += 3) {
-            key1 = keys[i], key2 = keys[i + 1], key3 = keys[i + 2]
+            let key1 = keys[i], key2 = keys[i + 1], key3 = keys[i + 2]
             views.push(<View key={i} style={{flexDirection: 'row'}}>
                 {this.getThemeItem(key1)}
                 {this.getThemeItem(key2)}

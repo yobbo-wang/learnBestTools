@@ -1,6 +1,12 @@
-/*
-* 首页
-*/
+/**
+ * learnBestTools
+ * App组件用来定义总体布局
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
+ */
+ 'use strict'
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import { Platform } from 'react-native'
@@ -11,6 +17,7 @@ import Learn from './LearnContainer'
 import School from './SchoolContainer'
 import My from './MyContainer'
 import CommonNavigateView from '../page/common/CommonNavigateView'
+import CodePush from 'react-native-code-push'
 import ArrayUtils from '../expand/ArrayUtils'
 
 console.disableYellowBox = true // 关闭警告
@@ -26,6 +33,19 @@ export default class App extends Component{
       }
   }      
 
+  static componentDidMount() {
+      CodePush.sync({
+          deploymentKey: 'RGOUfyINiLicZnld67aD0nrbRvyLV1Ifekvul', // KEY
+          updateDialog: {
+              optionalIgnoreButtonLabel: '稍后',
+              optionalInstallButtonLabel: '后台更新',
+              optionalUpdateMessage: '优学堂有新版本了，是否更新？',
+              title: '更新提示'
+          },
+          installMode: CodePush.InstallMode.ON_NEXT_RESTART
+      })
+  }
+
   addSubscriber(subscriber) {
       ArrayUtils.add(this.subscribers, subscriber)
   }
@@ -34,13 +54,13 @@ export default class App extends Component{
       ArrayUtils.remove(this.subscribers, subscriber)
   }
 
+  //把此方法依次往下传，每个组件把方法加到subscribers这个数组中，在对应的页面调用后会依次往下执行
   onThemeChange(theme) {
       if (!theme) return
       this.setState({
           theme: theme
       })
       this.changedValues.app.themeChange = true
-      //循环遍历数组中所有方法改变状态机值
       this.subscribers.forEach((item, index, arr)=> {
           if (typeof(item) == 'function') item(theme)
       })
@@ -103,7 +123,8 @@ const AppStack = StackNavigator(
       headerTitleStyle: {
         color: '#fff',
         fontSize: 20,
-        alignSelf:'center',
+        alignSelf: 'center',
+        alignItems: 'center',
       },
       headerTintColor: '#fff'
     }

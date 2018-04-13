@@ -1,7 +1,12 @@
 /**
-* Learn index.js
-*/
-
+ * learnBestTools
+ * 学习
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
+ */
+ 'use strict'
 import React, {Component} from 'react'
 import {
 	View, 
@@ -86,6 +91,7 @@ export default class Index extends Component {
                       textStyle={styles.tabText}
                     />
                   )}
+                  initialPage = {1}
                   tabBarBackgroundColor = {this.state.theme.themeColor}
                   tabBarUnderlineStyle = {styles.tabBarUnderline}
                   tabBarActiveTextColor= '#fff'

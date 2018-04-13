@@ -1,6 +1,12 @@
-/*
-* home action控制器
-*/
+/**
+ * learnBestTools
+ * home action控制器
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
+ */
+'use strict'
 import * as types from '../constants/ActionTypes'
 
 export function requestHomeList(

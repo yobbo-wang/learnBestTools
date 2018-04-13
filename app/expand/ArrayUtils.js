@@ -1,3 +1,12 @@
+/**
+ * learnBestTools
+ * 数组处理工具类
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
+ */
+'use strict'
 export default class ArrayUtils {
     /**
      * 更新数组,若item已存在则将其从数组中删除,若不存在则将其添加到数组

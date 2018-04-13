@@ -1,7 +1,12 @@
 /**
-* home index.js
-*/
-
+ * learnBestTools
+ * 首页
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
+ */
+ 'use strict'
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import { 
@@ -9,8 +14,9 @@ import {
 	View, 
 	Text, 
 	Image,
-  FlatList,
-  RefreshControl, 
+    FlatList,
+    RefreshControl, 
+    StatusBar,
 }from 'react-native'
 import SwiperIndex from './SwiperIndex'
 
@@ -69,6 +75,10 @@ export default class Index extends Component {
 	render() {
     	return(
         <View style={styles.container}>
+            <StatusBar
+                barStyle = {'light-content'}
+                backgroundColor = {this.state.theme.themeColor}
+            />
       	   <FlatList 
             ListHeaderComponent = {this.getSwiper.bind(this)}
             refreshControl={

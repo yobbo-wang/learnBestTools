@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "iosbundle": "react-native bundle --entry-file index.js --bundle-output ./ios/main.jsbundle --platform ios"
   },
   "dependencies": {
     "react": "16.3.1",
     "react-native": "0.55.1",
+    "react-native-code-push": "^5.3.2",
     "react-native-scrollable-tab-view": "^0.8.0",
     "react-native-splash-screen": "^3.0.6",
     "react-native-storage": "^0.2.2",
@@ -18,7 +20,7 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.0",
-    "react-native-code-push": "^5.3.2"
+    "update": "^0.7.4"
   },
   "devDependencies": {
     "babel-jest": "22.4.3",

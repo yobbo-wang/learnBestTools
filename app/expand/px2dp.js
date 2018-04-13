@@ -1,6 +1,12 @@
-/*
-* 系统像素转换
-*/
+/**
+ * learnBestTools
+ * 系统像素等比转换工具
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
+ */
+'use strict'
 import {Dimensions} from 'react-native'
 
 const deviceH = Dimensions.get('window').height

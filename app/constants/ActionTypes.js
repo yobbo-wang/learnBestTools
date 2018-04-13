@@ -1,6 +1,12 @@
-/*
-* 请求数据的所有类型
-*/
+/**
+ * learnBestTools
+ * ActionTypes
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
+ */
+'use strict'
 // 首页数据加载
 export const REQUEST_HOME_LIST = 'REQUEST_HOME_LIST'
 export const FETCH_HOME_LIST = 'FETCH_HOME_LIST'

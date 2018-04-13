@@ -1,7 +1,12 @@
 /**
- * 主题
- * @flow
+ * learnBestTools
+ * 全部主题颜色定义
+ * @author yobbo
+ * @date 2018-04-01
+ * @email yobbo_wang@163.com
+ * @copyright Copyright © 2016 yobbo
  */
+'use strict'
 'use strict'
 import {
     StyleSheet,
