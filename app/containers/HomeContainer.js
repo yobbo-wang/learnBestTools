@@ -42,8 +42,8 @@ class HomeContainer extends Component {
             backgroundColor: screenProps.appComponent.state.theme?screenProps.appComponent.state.theme.themeColor:screenProps.theme.themeColor
         },
         tabBarLabel: ({ tintColor, fontSize}) => (
-            <Text style={{color: tintColor == '#999999' ? tintColor : screenProps.appComponent.state.theme?
-            screenProps.appComponent.state.theme.themeColor:screenProps.theme.themeColor, fontSize:10}}>首页</Text>
+            <Text style={[{color: tintColor == '#999999' ? tintColor : screenProps.appComponent.state.theme?
+            screenProps.appComponent.state.theme.themeColor:screenProps.theme.themeColor}, styles.tabBarLabelText]}>首页</Text>
         ),
         headerRight: (
             <View style={{flexDirection: 'row',}}>
@@ -93,6 +93,15 @@ class HomeContainer extends Component {
   	}
 
 }
+
+const styles = StyleSheet.create({
+    tabBarLabelText: {
+        marginBottom: 1.5, 
+        fontSize: 10,
+        textAlign: 'center',
+        backgroundColor: 'transparent'
+    }
+})
 
 //关联状态机
 const mapStateToProps = (state) => {

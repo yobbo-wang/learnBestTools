@@ -84,7 +84,7 @@ export default class Index extends Component {
 	render() {
     	return (
             <View style={styles.container}>
-                <ScrollableTabView
+               <ScrollableTabView
                   renderTabBar={() => (
                     <ScrollableTabBar
                       tabStyle={styles.tab}

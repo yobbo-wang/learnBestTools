@@ -39,11 +39,12 @@ class LearnContainer extends Component {
 	    	source={require('../res/images/ic_trending.png')} />
 	    ),
         headerStyle:{
-            backgroundColor: screenProps.appComponent.state.theme?screenProps.appComponent.state.theme.themeColor:screenProps.theme.themeColor
+            backgroundColor: screenProps.appComponent.state.theme?screenProps.appComponent.state.theme.themeColor:screenProps.theme.themeColor,
+            borderBottomColor: screenProps.appComponent.state.theme?screenProps.appComponent.state.theme.themeColor:screenProps.theme.themeColor,
         },
         tabBarLabel: ({ tintColor, fontSize}) => (
-            <Text style={{color: tintColor == '#999999' ? tintColor : screenProps.appComponent.state.theme?
-            screenProps.appComponent.state.theme.themeColor:screenProps.theme.themeColor, fontSize:10}}>学习</Text>
+            <Text style={[{color: tintColor == '#999999' ? tintColor : screenProps.appComponent.state.theme?
+            screenProps.appComponent.state.theme.themeColor:screenProps.theme.themeColor}, styles.tabBarLabelText]}>学习</Text>
         ),
 	    headerRight: (
 	      	<View style={{flexDirection: 'row'}}>
@@ -95,6 +96,15 @@ class LearnContainer extends Component {
   	}
 
 }	
+
+const styles = StyleSheet.create({
+    tabBarLabelText: {
+        marginBottom: 1.5, 
+        fontSize: 10,
+        textAlign: 'center',
+        backgroundColor: 'transparent',
+    }
+})
 
 //关联状态机
 const mapStateToProps = (state) => {
