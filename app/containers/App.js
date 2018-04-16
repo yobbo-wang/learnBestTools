@@ -1,6 +1,7 @@
 /**
  * learnBestTools
  * App组件用来定义总体布局
+ *  react-navigation组件安卓端title不会居中,还有下划线，需要手动修改 react-navigation/src/Header/Header.js中的css样式
  * @author yobbo
  * @date 2018-04-01
  * @email yobbo_wang@163.com
@@ -13,9 +14,9 @@ import { Platform } from 'react-native'
 import { StackNavigator, TabNavigator } from 'react-navigation'
 import Splash from '../page/Splash'
 import HomeContainer from './HomeContainer'
-import Learn from './LearnContainer'
-import School from './SchoolContainer'
-import My from './MyContainer'
+import LearnContainer from './LearnContainer'
+import SchoolContainer from './SchoolContainer'
+import MyContainer from './MyContainer'
 import CommonNavigateView from '../page/common/CommonNavigateView'
 import CodePush from 'react-native-code-push'
 import ArrayUtils from '../expand/ArrayUtils'
@@ -76,9 +77,9 @@ export default class App extends Component{
 const TabContainer = TabNavigator(
   {
     Home: { screen: HomeContainer},
-    Learn: { screen: Learn },
-    School: { screen: School },
-    My: { screen: My }
+    Learn: { screen: LearnContainer },
+    School: { screen: SchoolContainer },
+    My: { screen: MyContainer }
   },
   {
     lazy: true,

@@ -17,7 +17,8 @@ import {
     TouchableNativeFeedback,
     Platform,
     Dimensions,
-    ScrollView
+    ScrollView,
+    TextInput,
 }
 from 'react-native'
 import Swiper from 'react-native-swiper'
@@ -25,6 +26,7 @@ import px2pd from '../../expand/px2dp'
 import SwiperIndex from '../home/SwiperIndex'
 import LearnDetail from './LearnDetail'
 import NavigationUtil from '../../expand/NavigationUtil'
+import SearchHeader from '../common/SearchHeader'
 
 const isIOS = Platform.OS == 'ios'
 const {width,height} = Dimensions.get('window')
@@ -67,10 +69,32 @@ export default class LocalLearn extends Component {
     }
 
     toLearnDesc() {
-        //定义所有组件用参数传给公共熏染组件显示
+        //定义所有组件用参数传给公共渲染组件显示
         let componentList = [<LearnDetail {...this.props} />], key = 'LocalLearn-CommonNavigateView'
-        const params = {theme: this.state.theme, title : '课件/实验讲义', componentList}
+        const params = {theme: this.state.theme, title : '实验讲义', componentList}
+        params.headerRight = this.getThemeHeaderRight.bind(this)
         NavigationUtil.navigate(this.props.navigation, 'CommonNavigateView', params, key)
+    }
+
+    //定义主题颜色头部导航右边显示
+    getThemeHeaderRight() {
+        return (
+            <View style={{flexDirection: 'row',}}>
+                <TouchableHighlight
+                    ref='button'
+                    underlayColor='transparent'
+                    onPress={()=>{
+                        alert('sousuo')
+                    }}>
+                    <View style={{padding:5, flexDirection: 'row'}}>
+                        <Image
+                            style={{width: 32, height: 32}}
+                            source={require('../../res/images/ic_search_white_48pt.png')}
+                        />
+                    </View>
+                </TouchableHighlight>
+              </View>
+        )
     }
 
     _learnClassify(){

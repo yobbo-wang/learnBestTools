@@ -8,11 +8,13 @@
  */
 'use strict'
 import React, {Component} from 'react'
+import { AsyncStorage } from 'react-native'
 import configureStore from './store/ConfigureStore'
-import sagas from './sagas/Index';
+import sagas from './sagas/Index'
 import { Provider } from 'react-redux'
 import App from './containers/App'
 import ThemeUtil from './expand/ThemeUtil'
+import ThemeFactory, {ThemeFlags} from './res/styles/ThemeFactory'
 
 const store = configureStore()
 store.runSaga(sagas)
@@ -32,6 +34,19 @@ export default class setup extends Component{
             })
         }))
     }    
+
+    // _loadInitState = async() => {
+    //     try {
+    //         let theme = await AsyncStorage.getItem('theme_key')
+    //         if(theme == undefined){
+    //             theme = ThemeFlags.Default.color
+    //         }
+    //         return null
+    //     } catch(error) {
+    //         alert(error)
+    //     }
+
+    // }
 
     render() {
         return (

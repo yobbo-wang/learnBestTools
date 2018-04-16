@@ -80,7 +80,6 @@ class LearnContainer extends Component {
         this.props.screenProps.appComponent.removeSubscriber(this.onSubscriber);
     }
 
-    // 回调改变主题颜色
     onSubscriber = (updateTheme)=> {
         var changedValues = this.props.screenProps.appComponent.changedValues
         if (changedValues.app.themeChange && updateTheme) {

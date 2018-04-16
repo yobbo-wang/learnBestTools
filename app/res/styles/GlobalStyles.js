@@ -16,9 +16,10 @@ const {height, width} = Dimensions.get('window');
 module.exports ={
     line: {
         flex: 1,
-        height: 0.4,
-        opacity:0.5,
+        height: 0.6,
+        opacity: 1,
         backgroundColor: 'darkgray',
+        left: 36,
     },
     cell_container: {
         flex: 1,

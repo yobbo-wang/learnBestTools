@@ -58,6 +58,7 @@ export default class Index extends Component {
                 return null
           case 'localLearn':
                 return (<LocalLearn {...this.props} /> )
+            break    
           case 'classicalCouse':
             
           case 'freeClassical':

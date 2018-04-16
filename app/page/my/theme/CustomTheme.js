@@ -19,10 +19,10 @@ import {
     TouchableHighlight,
     Dimensions
 } from "react-native"
-import ThemeFactory, {ThemeFlags} from "../../res/styles/ThemeFactory"
-import ThemeDao from "../../expand/ThemeUtil"
-import GlobalStyles from '../../res/styles/GlobalStyles'
-import  {isIPhoneX} from '../../expand/SafeUtils'
+import ThemeFactory, {ThemeFlags} from "../../../res/styles/ThemeFactory"
+import ThemeDao from "../../../expand/ThemeUtil"
+import GlobalStyles from '../../../res/styles/GlobalStyles'
+import  {isIPhoneX} from '../../../expand/SafeUtils'
 const height = Dimensions.get('window').height
 
 export default class CustomTheme extends Component {
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     modalContainer: {
         flex: 1,
         margin: 10,
-        padding: 10,
+        // padding: 10, 安卓端会报错，找不到padding属性
         marginTop: Platform.OS === 'ios' ? 20 : 10,
         marginBottom: isIPhoneX ? 34 : 5,
         backgroundColor: 'white',

@@ -26,18 +26,29 @@ export default class Index extends Component {
         }
     }
 
-    getRenderCotent() {
-        var pages =[]
-        for (var i = 0; i < playList.length; i++) {
-            pages.push(<Text>{playList[i]}</Text> )
+    componentDidMount() {
+        this.props.screenProps.appComponent.addSubscriber(this.onSubscriber)
+    }
+
+    componentWillUnmount() {
+        this.props.screenProps.appComponent.removeSubscriber(this.onSubscriber);
+    }
+
+    onSubscriber = (updateTheme)=> {
+        var changedValues = this.props.screenProps.appComponent.changedValues
+        if (changedValues.app.themeChange && updateTheme) {
+            this.setState({
+                theme: updateTheme
+            })
         }
-        return(
-            <View>{pages}</View>
-        )
     }
 
 	render() {
-     return this.getRenderCotent()
+        return(
+            <View>
+                <Text style={{color: this.state.theme.themeColor}}>Hello</Text>
+            </View>
+        )
 
   	}
 }	

@@ -24,7 +24,7 @@ export default class CommonNavigateView extends Component{
     }
 
   	static navigationOptions = ({ navigation, screenProps }) => ({
-  	    title: navigation.state.params.title,
+  	    title: typeof navigation.state.params.title == "function" ? navigation.state.params.title() : navigation.state.params.title,
   	    headerStyle: {
             backgroundColor: screenProps.appComponent.state.theme?screenProps.appComponent.state.theme.themeColor:screenProps.theme.themeColor 
         },
@@ -54,7 +54,7 @@ export default class CommonNavigateView extends Component{
         }
     }
  
-    //从参数中获取公共组件进行熏染
+    //从参数中获取公共组件进行渲染
     getRenderCotent() {
         const componentList = this.props.navigation.state.params.componentList
         let pages =[]
